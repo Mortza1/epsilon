@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:epsilonv7/screens/forgotPage3.dart';
+import 'package:epsilonv7/screens/portal.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -539,7 +540,7 @@ class AppStateManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  loginData(String num, String password, context, contxt) async {
+  loginData(String num, String password, context) async {
     SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
     dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
     final prefs = await SharedPreferences.getInstance();
@@ -552,14 +553,7 @@ class AppStateManager extends ChangeNotifier {
     });
     dialog.hide();
     Navigator.of(context, rootNavigator: true).pop('dialog');
-    if (response.statusCode == 200) {
-      if (kDebugMode) {
-        print(response.body);
-      }
-      setHash(json.decode(response.body));
-      await prefs.setString('hash', json.decode(response.body));
-      login();
-    } else {
+    if (response.body == "false") {
       return Fluttertoast.showToast(
           msg: "Login Unsuccessful",
           toastLength: Toast.LENGTH_SHORT,
@@ -568,6 +562,13 @@ class AppStateManager extends ChangeNotifier {
           backgroundColor: Colors.deepPurpleAccent,
           textColor: Colors.white,
           fontSize: 16.0);
+    } else{
+      if (kDebugMode) {
+        print(response.body);
+      }
+      setHash(json.decode(response.body));
+      await prefs.setString('hash', json.decode(response.body));
+      login();
     }
   }
   String regisID = "";
@@ -585,7 +586,9 @@ class AppStateManager extends ChangeNotifier {
     });
     dialog.hide();
     Navigator.of(context, rootNavigator: true).pop('dialog');
-    print(response.body);
+    if (kDebugMode) {
+      print(response.body);
+    }
     if (response.body == "true") {
       if (kDebugMode) {
         print(response.body);
@@ -618,9 +621,13 @@ class AppStateManager extends ChangeNotifier {
     });
     dialog.hide();
     Navigator.of(context, rootNavigator: true).pop('dialog');
-    print(response.body);
-    if (json.decode(response.body).length > 5) {
+    if (kDebugMode) {
       print(response.body);
+    }
+    if (json.decode(response.body).length > 5) {
+      if (kDebugMode) {
+        print(response.body);
+      }
       tempCode = json.decode(response.body);
       Navigator.push(
         context,
@@ -650,7 +657,9 @@ class AppStateManager extends ChangeNotifier {
     });
     dialog.hide();
     Navigator.of(context, rootNavigator: true).pop('dialog');
-    print(response.body);
+    if (kDebugMode) {
+      print(response.body);
+    }
     if (response.statusCode == 200) {
       Navigator.popUntil(
           context, ModalRoute.withName('/landing'));

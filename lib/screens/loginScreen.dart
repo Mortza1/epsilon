@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: const Color(0xfff8f8f8),
       body: SafeArea(
         child: SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,7 +261,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: MaterialButton(
                                     onPressed: () {
                                       if(_formkey.currentState!.validate()){
-                                      myProvider.loginData(num.text, password.text, context, _scaffoldKey.currentContext);}
+                                      myProvider.loginData(num.text, password.text, context);}
                                     },
                                     height: 50,
                                     minWidth:
