@@ -13,6 +13,7 @@ class _ForgotPage3State extends State<ForgotPage3> {
   TextEditingController password = TextEditingController();
   TextEditingController passwordAgain = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -59,15 +60,14 @@ class _ForgotPage3State extends State<ForgotPage3> {
                     child: Container(
                       decoration: const BoxDecoration(
                           color: Colors.white,
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(30))),
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
                       child: Form(
                         key: _formkey,
                         child: Column(
                           children: [
                             Padding(
                               padding:
-                              const EdgeInsets.fromLTRB(15, 25, 15, 15),
+                                  const EdgeInsets.fromLTRB(15, 25, 15, 15),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -79,30 +79,30 @@ class _ForgotPage3State extends State<ForgotPage3> {
                                         color: Color(0xffaf52e0),
                                         fontSize: 18,
                                         fontFamily: 'Syne',
-                                        fontWeight: FontWeight.bold,),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                   Padding(
                                     padding:
-                                    const EdgeInsets.fromLTRB(4, 8, 4, 8),
+                                        const EdgeInsets.fromLTRB(4, 8, 4, 8),
                                     child: TextFormField(
                                       controller: password,
                                       obscureText: true,
                                       textInputAction: TextInputAction.next,
                                       autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
+                                          AutovalidateMode.onUserInteraction,
                                       keyboardType: TextInputType.text,
                                       style: const TextStyle(
                                         color: Color(0xff361553),
                                         fontSize: 20,
                                         fontFamily: 'Syne',
-                                        fontWeight: FontWeight.bold,),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       cursorColor: const Color(0xffaf52e0),
                                       decoration: const InputDecoration(
-                                          contentPadding:
-                                          EdgeInsets.symmetric(
-                                              vertical: 5,
-                                              horizontal: 10.0),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10.0),
                                           focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                   width: 2,
@@ -117,18 +117,18 @@ class _ForgotPage3State extends State<ForgotPage3> {
                                                   Radius.circular(30))),
                                           focusedErrorBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  width: 2,
-                                                  color: Colors.red),
+                                                  width: 2, color: Colors.red),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(30))),
-                                          errorBorder: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.red), borderRadius: BorderRadius.all(Radius.circular(30))),
+                                          errorBorder:
+                                              OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.red), borderRadius: BorderRadius.all(Radius.circular(30))),
                                           filled: true,
                                           fillColor: Color(0xfff8f8f8)),
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
                                           return 'Please enter password';
                                         } else if (!RegExp(
-                                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+                                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
                                             .hasMatch(value)) {
                                           return 'Min requirements: >8, 1 upper, 1 lower, 1 digit';
                                         }
@@ -140,44 +140,44 @@ class _ForgotPage3State extends State<ForgotPage3> {
                               ),
                             ),
                             Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: Container(
                                 child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Padding(
-                                      padding:
-                                      EdgeInsets.fromLTRB(24, 0, 0, 0),
+                                      padding: EdgeInsets.fromLTRB(24, 0, 0, 0),
                                       child: Text(
                                         "Re-enter password",
                                         style: TextStyle(
                                           color: Color(0xffaf52e0),
                                           fontSize: 18,
                                           fontFamily: 'Syne',
-                                          fontWeight: FontWeight.bold,),
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          4, 8, 4, 8),
+                                      padding:
+                                          const EdgeInsets.fromLTRB(4, 8, 4, 8),
                                       child: TextFormField(
                                         controller: passwordAgain,
                                         obscureText: true,
-                                        autovalidateMode: AutovalidateMode
-                                            .onUserInteraction,
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
                                         keyboardType: TextInputType.text,
                                         style: const TextStyle(
                                           color: Color(0xff361553),
                                           fontSize: 20,
                                           fontFamily: 'Syne',
-                                          fontWeight: FontWeight.bold,),
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                         cursorColor: const Color(0xff361553),
                                         decoration: const InputDecoration(
-                                            contentPadding: EdgeInsets.symmetric(
-                                                vertical: 5,
-                                                horizontal: 10.0),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 5,
+                                                    horizontal: 10.0),
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     width: 2,
@@ -196,12 +196,16 @@ class _ForgotPage3State extends State<ForgotPage3> {
                                                     color: Colors.red),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(30))),
-                                            errorBorder:
-                                            OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.red), borderRadius: BorderRadius.all(Radius.circular(30))),
+                                            errorBorder: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.red), borderRadius: BorderRadius.all(Radius.circular(30))),
                                             filled: true,
                                             fillColor: Color(0xfff8f8f8)),
                                         validator: (value) {
-                                          value == null || value.isEmpty? "Enter a password" : value != password.text ? 'Password do not match' : null;
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter password';
+                                          } else if (value != password.text) {
+                                            return 'password do not match';
+                                          }
+                                          return null;
                                         },
                                       ),
                                     )
@@ -213,21 +217,21 @@ class _ForgotPage3State extends State<ForgotPage3> {
                               height: 25,
                             ),
                             Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(15, 15, 15, 8),
+                              padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
                               child: MaterialButton(
                                 onPressed: () {
-                                  if(_formkey.currentState!.validate()){
-                                  myProvider.changePass(passwordAgain.text, context);}
-
+                                  if (_formkey.currentState!.validate()) {
+                                    myProvider.changePass(
+                                        passwordAgain.text, context);
+                                  }
                                 },
                                 height: 50,
                                 minWidth:
-                                MediaQuery.of(context).size.width * 0.9,
+                                    MediaQuery.of(context).size.width * 0.9,
                                 color: const Color(0xff361553),
                                 shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10))),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                                 child: const Text(
                                   "Enter",
                                   style: TextStyle(

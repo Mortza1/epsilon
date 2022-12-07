@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state-manager.dart';
@@ -23,10 +24,12 @@ class _PaymentPageState extends State<PaymentPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           var hello = snapshot.data as Map<String, dynamic>;
+          //print(hello);
           var status = hello["paymentStatus"];
           var members = hello["members"];
+          var payment = hello["payment"];
           var NumOfMembers = members.length;
-          var x = 2500;
+          //var x = 2500;
           return Scaffold(
             backgroundColor: Colors.grey.shade300,
             body: SafeArea(
@@ -112,8 +115,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                         fontSize: 15),
                                   ),
                                 ),
-                                 Text(
-                                  "Rs ${x*(NumOfMembers+1)}.00",
+                                Text(
+                                  "Rs $payment.00",
                                   style: const TextStyle(
                                       color: Color(0xff361553),
                                       fontSize: 35,
@@ -158,7 +161,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      "Rs ${x*NumOfMembers}",
+                                      "Rs ${((payment - 2500)/NumOfMembers).round()}",
                                       style: const TextStyle(
                                           color: Color(0xffaf52e0),
                                           fontSize: 25,
@@ -207,7 +210,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10))),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Padding(
                                     padding: EdgeInsets.all(8.0),
@@ -232,7 +236,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children:  [
+                                        children: [
                                           Text(
                                             status,
                                             style: const TextStyle(
@@ -247,26 +251,35 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
                           Container(
                             width: MediaQuery.of(context).size.width,
                             decoration: const BoxDecoration(
-                              //border: Border.all(color: Colors.black, width: 3)
-                            ),
+                                //border: Border.all(color: Colors.black, width: 3)
+                                ),
                             child: Column(
                               children: [
-                                const Text("Upload proof of payment image", style: TextStyle(color: Color(0xffaf52e0), fontSize: 15),),
-                                const SizedBox(height: 8,),
+                                const Text(
+                                  "Upload proof of payment image",
+                                  style: TextStyle(
+                                      color: Color(0xffaf52e0), fontSize: 15),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
                                 MaterialButton(
                                   onPressed: () {
                                     myProvider.getImage();
                                   },
                                   height: 50,
-                                  minWidth: MediaQuery.of(context).size.width * 0.5,
+                                  minWidth:
+                                      MediaQuery.of(context).size.width * 0.5,
                                   color: Colors.yellow,
                                   shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(30))),
                                   child: const Text(
                                     "Fetch Image",
                                     style: TextStyle(
@@ -276,17 +289,33 @@ class _PaymentPageState extends State<PaymentPage> {
                                         fontSize: 20),
                                   ),
                                 ),
-                                const SizedBox(height: 10,),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                                 MaterialButton(
                                   onPressed: () {
-                                    myProvider.proofOfpayment(context);
+                                    if (myProvider.image.path.isNotEmpty) {
+                                      myProvider.proofOfpayment(context);
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg:
+                                              "Select an image first.",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor:
+                                              Colors.deepPurpleAccent,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                    }
                                   },
                                   height: 50,
-                                  minWidth: MediaQuery.of(context).size.width * 0.9,
+                                  minWidth:
+                                      MediaQuery.of(context).size.width * 0.9,
                                   color: const Color(0xff361553),
                                   shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
                                   child: const Text(
                                     "Upload",
                                     style: TextStyle(
@@ -298,8 +327,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 ),
                               ],
                             ),
-                          )
-                          ,
+                          ),
                         ],
                       ),
                     )

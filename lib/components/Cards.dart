@@ -22,7 +22,7 @@ class FrontCard extends StatelessWidget {
         shadowColor: const Color(0xff1d8a99),
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         child: Hero(
-          tag: "demon",
+          tag: index.toString(),
           child: Container(
             height: 120,
             width: MediaQuery.of(context).size.width * 0.9,

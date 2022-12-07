@@ -91,7 +91,7 @@ class _ForgotPage2State extends State<ForgotPage2> {
                                       textInputAction: TextInputAction.next,
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.text,
                                       style: const TextStyle(
                                         color: Color(0xff361553),
                                         fontSize: 35,
@@ -166,6 +166,19 @@ class _ForgotPage2State extends State<ForgotPage2> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 30,),
+                const Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Text(
+                    "Check head delegate's email address for a verification code.",
+                    style: TextStyle(
+                        color: Color(0xff361553),
+                        fontSize: 15,
+                        fontFamily: "OpenSan",
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                )
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:epsilonv7/components/phone.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -45,7 +46,7 @@ class _Delegate2State extends State<Delegate2> {
     phoneController.dispose();
     super.dispose();
   }
-
+  String _groupValue = "private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -109,7 +110,7 @@ class _Delegate2State extends State<Delegate2> {
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
-                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(value)) {
                           return 'Please enter a valid email';
                         }
@@ -138,10 +139,16 @@ class _Delegate2State extends State<Delegate2> {
                                   : null,
                     ),
                     InstituteBox(
-                      groupValue: myProvider.mem2Ins,
-                      onChange: (value) {
-                        myProvider.setmem2Ins(value.toString());
-                      },
+                        groupValue: _groupValue,
+                        onChange: (value) {
+                          setState(() {
+                            _groupValue = value.toString();
+                            myProvider.setmem2Ins(value.toString());
+                            if (kDebugMode) {
+                              print(myProvider.mem2Ins);
+                            }
+                          });
+                        },
                       controller: instituteController,
                       onChanged: myProvider.setMember2institute,
                     )
@@ -195,7 +202,7 @@ class _Delegate3State extends State<Delegate3> {
     phoneController.dispose();
     super.dispose();
   }
-
+  String _groupValue = "private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -258,7 +265,7 @@ class _Delegate3State extends State<Delegate3> {
                         validator: (value) {
                           if (value == null ||
                               value.isEmpty ||
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
@@ -286,9 +293,15 @@ class _Delegate3State extends State<Delegate3> {
                           : null,
                     ),
                     InstituteBox(
-                      groupValue: myProvider.mem3Ins,
+                      groupValue: _groupValue,
                       onChange: (value) {
-                        myProvider.setmem3Ins(value.toString());
+                        setState(() {
+                          _groupValue = value.toString();
+                          myProvider.setmem3Ins(value.toString());
+                          if (kDebugMode) {
+                            print(myProvider.mem3Ins);
+                          }
+                        });
                       },
                       controller: instituteController,
                       onChanged: myProvider.setMember3institute,
@@ -343,7 +356,7 @@ class _Delegate4State extends State<Delegate4> {
     phoneController.dispose();
     super.dispose();
   }
-
+  String _groupValue = "private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -406,7 +419,7 @@ class _Delegate4State extends State<Delegate4> {
                         validator: (value) {
                           if (value == null ||
                               value.isEmpty ||
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
@@ -434,9 +447,15 @@ class _Delegate4State extends State<Delegate4> {
                           : null,
                     ),
                     InstituteBox(
-                      groupValue: myProvider.mem4Ins,
+                      groupValue: _groupValue,
                       onChange: (value) {
-                        myProvider.setmem4Ins(value.toString());
+                        setState(() {
+                          _groupValue = value.toString();
+                          myProvider.setmem4Ins(value.toString());
+                          if (kDebugMode) {
+                            print(myProvider.mem4Ins);
+                          }
+                        });
                       },
                       controller: instituteController,
                       onChanged: myProvider.setMember4institute,
@@ -491,7 +510,7 @@ class _Delegate5State extends State<Delegate5> {
     phoneController.dispose();
     super.dispose();
   }
-
+  String _groupValue = "private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -546,7 +565,7 @@ class _Delegate5State extends State<Delegate5> {
                         errorText: 'Please enter a valid email',
                         validator: (value) {
                           if (value != null &&
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
@@ -574,9 +593,15 @@ class _Delegate5State extends State<Delegate5> {
                           : null,
                     ),
                     InstituteBox(
-                      groupValue: myProvider.mem5Ins,
+                      groupValue: _groupValue,
                       onChange: (value) {
-                        myProvider.setmem5Ins(value.toString());
+                        setState(() {
+                          _groupValue = value.toString();
+                          myProvider.setmem5Ins(value.toString());
+                          if (kDebugMode) {
+                            print(myProvider.mem5Ins);
+                          }
+                        });
                       },
                       controller: instituteController,
                       onChanged: myProvider.setMember5institute,
@@ -642,7 +667,7 @@ class _Delegate6State extends State<Delegate6> {
     phoneController.dispose();
     super.dispose();
   }
-
+  String _groupValue = "private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -697,7 +722,7 @@ class _Delegate6State extends State<Delegate6> {
                         errorText: 'Please enter a valid email',
                         validator: (value) {
                           if (value != null &&
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
@@ -725,9 +750,15 @@ class _Delegate6State extends State<Delegate6> {
                           : null,
                     ),
                     InstituteBox(
-                      groupValue: myProvider.mem6Ins,
+                      groupValue: _groupValue,
                       onChange: (value) {
-                        myProvider.setmem6Ins(value.toString());
+                        setState(() {
+                          _groupValue = value.toString();
+                          myProvider.setmem6Ins(value.toString());
+                          if (kDebugMode) {
+                            print(myProvider.mem6Ins);
+                          }
+                        });
                       },
                       controller: instituteController,
                       onChanged: myProvider.setMember6institute,
@@ -793,7 +824,7 @@ class _Delegate7State extends State<Delegate7> {
     phoneController.dispose();
     super.dispose();
   }
-
+  String _groupValue = "private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -848,7 +879,7 @@ class _Delegate7State extends State<Delegate7> {
                         errorText: 'Please enter a valid email',
                         validator: (value) {
                           if (value != null &&
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
@@ -876,9 +907,15 @@ class _Delegate7State extends State<Delegate7> {
                           : null,
                     ),
                     InstituteBox(
-                      groupValue: myProvider.mem7Ins,
+                      groupValue: _groupValue,
                       onChange: (value) {
-                        myProvider.setmem7Ins(value.toString());
+                        setState(() {
+                          _groupValue = value.toString();
+                          myProvider.setmem7Ins(value.toString());
+                          if (kDebugMode) {
+                            print(myProvider.mem7Ins);
+                          }
+                        });
                       },
                       controller: instituteController,
                       onChanged: myProvider.setMember7institute,
@@ -927,61 +964,59 @@ class TextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 0, 0),
-              child: Text(
-                header,
-                style: const TextStyle(
-                    color: Color(0xffaf52e0),
-                    fontSize: 18,
-                    fontFamily: "Syne",
-                    fontWeight: FontWeight.bold),
-              ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 0, 0),
+            child: Text(
+              header,
+              style: const TextStyle(
+                  color: Color(0xffaf52e0),
+                  fontSize: 18,
+                  fontFamily: "Syne",
+                  fontWeight: FontWeight.bold),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
-              child: TextFormField(
-                controller: controller,
-                onChanged: onChanged,
-                textInputAction: action,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                keyboardType: keyType,
-                style: const TextStyle(
-                    color: Color(0xff361553),
-                    fontSize: 20,
-                    fontFamily: "Syne",
-                    fontWeight: FontWeight.bold),
-                cursorColor: const Color(0xff361553),
-                decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 5, horizontal: 20.0),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 2, color: Color(0xff361553)),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 2, color: Color(0xffeeeeee)),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: Colors.red),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: Colors.red),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    filled: true,
-                    fillColor: Color(0xfff8f8f8)),
-                validator: validator,
-              ),
-            )
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
+            child: TextFormField(
+              controller: controller,
+              onChanged: onChanged,
+              textInputAction: action,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              keyboardType: keyType,
+              style: const TextStyle(
+                  color: Color(0xff361553),
+                  fontSize: 20,
+                  fontFamily: "Syne",
+                  fontWeight: FontWeight.bold),
+              cursorColor: const Color(0xff361553),
+              decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 5, horizontal: 20.0),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: Color(0xff361553)),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: Color(0xffeeeeee)),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Colors.red),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 1, color: Colors.red),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  filled: true,
+                  fillColor: Color(0xfff8f8f8)),
+              validator: validator,
+            ),
+          )
+        ],
       ),
     );
   }

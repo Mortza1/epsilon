@@ -70,6 +70,7 @@ class AppStateManager extends ChangeNotifier {
     _hdPhoneComplete = hdPhoneComplete;
     notifyListeners();
   }
+
 //***************************************************************************************************************************************
   // all member 2 credentials
 
@@ -126,6 +127,7 @@ class AppStateManager extends ChangeNotifier {
     _member2institute = member2institute;
     notifyListeners();
   }
+
 //****************************************************************************************************************************************
   // all member 3 details
 
@@ -182,6 +184,7 @@ class AppStateManager extends ChangeNotifier {
     _mem3PhoneComplete = mem3PhoneComplete;
     notifyListeners();
   }
+
 //******************************************************************************************************************************************
   //all member 4 details
 
@@ -238,6 +241,7 @@ class AppStateManager extends ChangeNotifier {
     _mem4Phone = mem4Phone;
     notifyListeners();
   }
+
 //******************************************************************************************************************************************
   //all member 5 details
 
@@ -303,6 +307,7 @@ class AppStateManager extends ChangeNotifier {
     _mem5PhoneComplete = mem5PhoneComplete;
     notifyListeners();
   }
+
 //******************************************************************************************************************************************
   //all member 6 details
   String _mem6Ins = 'private';
@@ -349,6 +354,7 @@ class AppStateManager extends ChangeNotifier {
     _member6institute = member6institute;
     notifyListeners();
   }
+
 //******************************************************************************************************************************************
   //all member 7 details
   String _mem7Ins = 'private';
@@ -404,6 +410,7 @@ class AppStateManager extends ChangeNotifier {
     _member7institute = member7institute;
     notifyListeners();
   }
+
 //******************************************************************************************************************************************
   // all extra details
   List _stemmodules = [];
@@ -459,6 +466,7 @@ class AppStateManager extends ChangeNotifier {
     _brandName = brandName;
     notifyListeners();
   }
+
 //******************************************************************************************************************************************
   //all calculations and data
   late String _hash;
@@ -541,8 +549,16 @@ class AppStateManager extends ChangeNotifier {
   }
 
   loginData(String num, String password, context) async {
-    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
-    dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
+    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+    dialog.show(
+        message: 'Loading...',
+        type: SimpleFontelicoProgressDialogType.normal,
+        backgroundColor: Colors.deepPurpleAccent,
+        indicatorColor: Colors.white,
+        height: 100,
+        width: 200,
+        textStyle: const TextStyle(color: Colors.white));
     final prefs = await SharedPreferences.getInstance();
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
@@ -562,21 +578,35 @@ class AppStateManager extends ChangeNotifier {
           backgroundColor: Colors.deepPurpleAccent,
           textColor: Colors.white,
           fontSize: 16.0);
-    } else{
+    } else {
       if (kDebugMode) {
         print(response.body);
       }
       setHash(json.decode(response.body));
       await prefs.setString('hash', json.decode(response.body));
       login();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Portal()),
+      );
     }
   }
+
   String regisID = "";
   String tempPass = "";
   String tempCode = "";
+
   forgotPassword(String regId, String email, context) async {
-    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
-    dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
+    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+    dialog.show(
+        message: 'Loading...',
+        type: SimpleFontelicoProgressDialogType.normal,
+        backgroundColor: Colors.deepPurpleAccent,
+        indicatorColor: Colors.white,
+        height: 100,
+        width: 200,
+        textStyle: const TextStyle(color: Colors.white));
     regisID = regId;
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
@@ -589,17 +619,7 @@ class AppStateManager extends ChangeNotifier {
     if (kDebugMode) {
       print(response.body);
     }
-    if (response.body == "true") {
-      if (kDebugMode) {
-        print(response.body);
-      }
-      //tempPass = json.decode(response.body);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => const ForgotPage2()),
-      );
-    } else {
+    if (response.body == "false") {
       return Fluttertoast.showToast(
           msg: "Email not found.",
           toastLength: Toast.LENGTH_SHORT,
@@ -608,11 +628,32 @@ class AppStateManager extends ChangeNotifier {
           backgroundColor: Colors.deepPurpleAccent,
           textColor: Colors.white,
           fontSize: 16.0);
+    } else {
+      if (kDebugMode) {
+        print(response.body);
+      }
+      if (kDebugMode) {
+        print(response.body);
+      }
+      //tempPass = json.decode(response.body);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ForgotPage2()),
+      );
     }
   }
+
   verifyCode(String code, context) async {
-    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
-    dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
+    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+    dialog.show(
+        message: 'Loading...',
+        type: SimpleFontelicoProgressDialogType.normal,
+        backgroundColor: Colors.deepPurpleAccent,
+        indicatorColor: Colors.white,
+        height: 100,
+        width: 200,
+        textStyle: const TextStyle(color: Colors.white));
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
       "query": "verifyCode",
@@ -624,17 +665,7 @@ class AppStateManager extends ChangeNotifier {
     if (kDebugMode) {
       print(response.body);
     }
-    if (json.decode(response.body).length > 5) {
-      if (kDebugMode) {
-        print(response.body);
-      }
-      tempCode = json.decode(response.body);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => const ForgotPage3()),
-      );
-    } else {
+    if (response.body == "false") {
       return Fluttertoast.showToast(
           msg: "Verification code is incorrect.",
           toastLength: Toast.LENGTH_SHORT,
@@ -643,17 +674,35 @@ class AppStateManager extends ChangeNotifier {
           backgroundColor: Colors.deepPurpleAccent,
           textColor: Colors.white,
           fontSize: 16.0);
+    } else {
+      if (kDebugMode) {
+        print(response.body);
+      }
+      tempCode = json.decode(response.body);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ForgotPage3()),
+      );
     }
   }
+
   changePass(String pass, context) async {
-    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
-    dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
+    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+    dialog.show(
+        message: 'Loading...',
+        type: SimpleFontelicoProgressDialogType.normal,
+        backgroundColor: Colors.deepPurpleAccent,
+        indicatorColor: Colors.white,
+        height: 100,
+        width: 200,
+        textStyle: const TextStyle(color: Colors.white));
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
       "query": "changePassword",
       "regId": regisID,
       "hash": tempCode,
-      "newPass" : pass
+      "newPass": pass
     });
     dialog.hide();
     Navigator.of(context, rootNavigator: true).pop('dialog');
@@ -661,8 +710,15 @@ class AppStateManager extends ChangeNotifier {
       print(response.body);
     }
     if (response.statusCode == 200) {
-      Navigator.popUntil(
-          context, ModalRoute.withName('/landing'));
+      Navigator.popUntil(context, ModalRoute.withName('/landing'));
+      return Fluttertoast.showToast(
+          msg: "Password changed successfully.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.deepPurpleAccent,
+          textColor: Colors.white,
+          fontSize: 16.0);
     } else {
       return Fluttertoast.showToast(
           msg: "Error. Try Again.",
@@ -674,6 +730,7 @@ class AppStateManager extends ChangeNotifier {
           fontSize: 16.0);
     }
   }
+
   teamData() async {
     var response = await http.post(
         Uri.parse("https://www.epsilon.net.pk/query.php"),
@@ -706,6 +763,7 @@ class AppStateManager extends ChangeNotifier {
       }
     }
   }
+
   void landApp() {
     _isLanded = true;
     notifyListeners();
@@ -727,8 +785,16 @@ class AppStateManager extends ChangeNotifier {
   }
 
   void logout(context) async {
-    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
-    dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
+    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+    dialog.show(
+        message: 'Loading...',
+        type: SimpleFontelicoProgressDialogType.normal,
+        backgroundColor: Colors.deepPurpleAccent,
+        indicatorColor: Colors.white,
+        height: 100,
+        width: 200,
+        textStyle: const TextStyle(color: Colors.white));
     final prefs = await SharedPreferences.getInstance();
     final success = await prefs.remove('hash');
     dialog.hide();
@@ -740,8 +806,16 @@ class AppStateManager extends ChangeNotifier {
   }
 
   proofOfpayment(context) async {
-    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
-    dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
+    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+    dialog.show(
+        message: 'Loading...',
+        type: SimpleFontelicoProgressDialogType.normal,
+        backgroundColor: Colors.deepPurpleAccent,
+        indicatorColor: Colors.white,
+        height: 100,
+        width: 200,
+        textStyle: const TextStyle(color: Colors.white));
     var formData = FormData.fromMap({
       'query': 'proofOfPayment',
       'hash': _hash,
@@ -755,6 +829,7 @@ class AppStateManager extends ChangeNotifier {
       dialog.hide();
       Navigator.of(context, rootNavigator: true).pop('dialog');
       if (response.data == "true") {
+        setimage(File(''));
         return Fluttertoast.showToast(
             msg:
                 "Successful. Your payment status will be updated in a few days.",
@@ -785,57 +860,62 @@ class AppStateManager extends ChangeNotifier {
   }
 
   registerData(context, contxt) async {
-    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
+    SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
     List members = [
       {
         'name': _headDelegateName,
         'email': _headEmail,
         'number': _hdPhoneComplete,
-        'institution': '${_headIns == "institute"? _headInstitution : _headIns})'
+        'institution': _headIns == "institute" ? _headInstitution : _headIns
       },
       {
         'name': _member2name,
         'email': _member2email,
         'number': _mem2PhoneComplete,
-        'institution': _mem2Ins == "institute"? _member2institute : _mem2Ins
+        'institution': _mem2Ins == "institute" ? _member2institute : _mem2Ins
       },
       {
         'name': _member3name,
         'email': _member3email,
         'number': _mem3PhoneComplete,
-        'institution': _mem3Ins == "institute"? _member3institute : _mem3Ins
+        'institution': _mem3Ins == "institute" ? _member3institute : _mem3Ins
       },
       {
         'name': _member4name,
         'email': _member4email,
         'number': _mem4PhoneComplete,
-        'institution': _mem4Ins == "institute"? _member4institute : _mem4Ins
+        'institution': _mem4Ins == "institute" ? _member4institute : _mem4Ins
       },
       {
         'name': _member5name,
         'email': _member5email,
         'number': _mem5PhoneComplete,
-        'institution': _mem5Ins == "institute"? _member5institute : _mem5Ins
+        'institution': _mem5Ins == "institute" ? _member5institute : _mem5Ins
       },
       {
         'name': _member6name,
         'email': _member6email,
         'number': _mem6PhoneComplete,
-        'institution': _mem6Ins == "institute"? _member6institute : _mem6Ins
+        'institution': _mem6Ins == "institute" ? _member6institute : _mem6Ins
       },
       {
         'name': _member7name,
         'email': _member7email,
         'number': _mem7PhoneComplete,
-        'institution': _mem7Ins == "institute"? _member7institute : _mem7Ins
+        'institution': _mem7Ins == "institute" ? _member7institute : _mem7Ins
       }
     ];
     List data = [];
     if (member5name.isEmpty || mem5Phone.isEmpty || member5email.isEmpty) {
       data = members.sublist(0, 4);
-    } else if (member6name.isEmpty || mem6Phone.isEmpty || member6email.isEmpty) {
+    } else if (member6name.isEmpty ||
+        mem6Phone.isEmpty ||
+        member6email.isEmpty) {
       data = members.sublist(0, 5);
-    }else if(member7name.isEmpty || mem7Phone.isEmpty || member7email.isEmpty){
+    } else if (member7name.isEmpty ||
+        mem7Phone.isEmpty ||
+        member7email.isEmpty) {
       data = members.sublist(0, 6);
     } else {
       data = members;
@@ -848,14 +928,21 @@ class AppStateManager extends ChangeNotifier {
     if (kDebugMode) {
       print(data);
     }
-    dialog.show(message: 'Loading...', type: SimpleFontelicoProgressDialogType.normal, backgroundColor: Colors.deepPurpleAccent, indicatorColor: Colors.white, height: 100, width: 200, textStyle: const TextStyle(color: Colors.white));
+    dialog.show(
+        message: 'Loading...',
+        type: SimpleFontelicoProgressDialogType.normal,
+        backgroundColor: Colors.deepPurpleAccent,
+        indicatorColor: Colors.white,
+        height: 100,
+        width: 200,
+        textStyle: const TextStyle(color: Colors.white));
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
       "query": "register",
       "members": json.encode(data),
       "name": _teamName,
       "password": _passwordAgain,
-      "bar": bar ?? "",
+      "bar": _brandName == "Not Applicable" ? "138" : bar ?? "138",
       "notes": _note,
       "modules": json.encode(_stemmodules)
     });
@@ -873,6 +960,7 @@ class AppStateManager extends ChangeNotifier {
         context,
         MaterialPageRoute(builder: (context) => const RegisSuccess()),
       );
+      //clear();
       _registered = true;
       notifyListeners();
     } else {
@@ -891,5 +979,49 @@ class AppStateManager extends ChangeNotifier {
           textColor: Colors.white,
           fontSize: 16.0);
     }
+  }
+
+  clear() {
+    _headInstitution = '';
+    _headDelegateName = '';
+    _headEmail = '';
+    _hdPhone = '';
+    _hdPhoneComplete = '';
+    _mem2Phone = '';
+    _mem2PhoneComplete = '';
+    _member2name = '';
+    _member2email = '';
+    _member2institute = '';
+    _mem3Phone = '';
+    _mem3PhoneComplete = '';
+    _member3name = '';
+    _member3email = '';
+    _member3institute = '';
+    _mem4Phone = '';
+    _mem4PhoneComplete = '';
+    _member4name = '';
+    _member4email = '';
+    _member4institute = '';
+    _mem5Phone = '';
+    _mem5PhoneComplete = '';
+    _member5name = '';
+    _member5email = '';
+    _member5institute = '';
+    _mem6Phone = '';
+    _mem6PhoneComplete = '';
+    _member6name = '';
+    _member6email = '';
+    _member6institute = '';
+    _mem7Phone = '';
+    _mem7PhoneComplete = '';
+    _member7name = '';
+    _member7email = '';
+    _member7institute = '';
+    _stemmodules = [];
+    _password = '';
+    _passwordAgain = '';
+    _teamName = '';
+    _note = '';
+    _brandName = null;
   }
 }

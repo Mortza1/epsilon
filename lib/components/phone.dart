@@ -9,7 +9,8 @@ class Phone extends StatefulWidget {
   const Phone({
     Key? key,
     required this.onChange,
-    required this.phoneController, this.validator,
+    required this.phoneController,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -114,7 +115,10 @@ class PhoneTextfield extends StatelessWidget {
   final String? Function(String?)? validator;
 
   const PhoneTextfield(
-      {Key? key, required this.onChange, required this.controller, this.validator})
+      {Key? key,
+      required this.onChange,
+      required this.controller,
+      this.validator})
       : super(key: key);
 
   @override

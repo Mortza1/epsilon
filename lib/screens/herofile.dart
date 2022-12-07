@@ -21,7 +21,7 @@ class Herocard extends StatelessWidget {
         children: [
           Stack(children: [
             Hero(
-                tag: "demon",
+                tag: num.toString(),
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Material(

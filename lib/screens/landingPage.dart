@@ -33,7 +33,9 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<AppStateManager>(context, listen: false).barData();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<AppStateManager>(context, listen: false).barData();
+    });
   }
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -516,7 +518,7 @@ class Fees extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                                     child: Text(
-                                      "3500",
+                                      "2500",
                                       style: TextStyle(
                                           fontFamily: 'Syne',
                                           fontWeight: FontWeight.bold,
@@ -679,7 +681,7 @@ class Contact extends StatelessWidget {
                   width: 50,
                   alignment: Alignment.center,
                   child: GestureDetector(
-                      onTap: launchUrll,
+                      onTap: () => launchUrll,
                       child: Image.asset('assets/instagram.png')),
                 )
               ],

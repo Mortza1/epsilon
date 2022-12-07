@@ -515,7 +515,7 @@ class _HeadDelegateState extends State<HeadDelegate> {
     phoneController.dispose();
     super.dispose();
   }
-
+  String _groupValue = "private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -606,9 +606,13 @@ class _HeadDelegateState extends State<HeadDelegate> {
                                         : null,
                           ),
                           InstituteBox(
-                            groupValue: myProvider.headIns,
+                            groupValue: _groupValue,
                             onChange: (value) {
-                              myProvider.setheadIns(value.toString());
+                              setState(() {
+                                _groupValue = value.toString();
+                                myProvider.setheadIns(value.toString());
+                                print(myProvider.headIns);
+                              });
                             },
                             controller: instituteController,
                             onChanged: myProvider.setHeadInstitution,
@@ -933,7 +937,7 @@ class _TeamDetailsState extends State<TeamDetails> {
   }
 }
 
-class InstituteBox extends StatelessWidget {
+class InstituteBox extends StatefulWidget {
   final String groupValue;
   final Function(String?) onChange;
   final Function(String) onChanged;
@@ -944,20 +948,25 @@ class InstituteBox extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<InstituteBox> createState() => _InstituteBoxState();
+}
+
+class _InstituteBoxState extends State<InstituteBox> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
       child: Column(
         children: [
-          groupValue == "institute"
+          widget.groupValue == "institute"
               ? Column(
             children: [
               const SizedBox(
                 height: 20,
               ),
               TextField(
-                controller: controller,
-                onChanged: onChanged,
+                controller: widget.controller,
+                onChanged: widget.onChanged,
                 header: "Enter institution name",
                 action: TextInputAction.next,
                 errorText: "Please enter institution name",
@@ -1014,8 +1023,8 @@ class InstituteBox extends StatelessWidget {
                             children: [
                               Radio(
                                 value: "private",
-                                groupValue: groupValue,
-                                onChanged: onChange,
+                                groupValue: widget.groupValue,
+                                onChanged: widget.onChange,
                                 activeColor: const Color(0xff361553),
                                 materialTapTargetSize: MaterialTapTargetSize.padded,
                               ),
@@ -1035,8 +1044,8 @@ class InstituteBox extends StatelessWidget {
                                 activeColor: const Color(0xff361553),
                                 materialTapTargetSize: MaterialTapTargetSize.padded,
                                 value: "Alpha College",
-                                groupValue: groupValue,
-                                onChanged: onChange),
+                                groupValue: widget.groupValue,
+                                onChanged: widget.onChange),
                             const Text(
                               "Alpha College",
                               style: TextStyle(
@@ -1055,8 +1064,8 @@ class InstituteBox extends StatelessWidget {
                                   materialTapTargetSize:
                                       MaterialTapTargetSize.padded,
                                   value: "institute",
-                                  groupValue: groupValue,
-                                  onChanged: onChange),
+                                  groupValue: widget.groupValue,
+                                  onChanged: widget.onChange),
                               const Text(
                                 "enter institute",
                                 style: TextStyle(
