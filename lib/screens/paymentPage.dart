@@ -46,8 +46,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
                           child: IconButton(
                               onPressed: () {
-                                Navigator.popUntil(
-                                    context, ModalRoute.withName('/'));
+                                Navigator.pop(context);
                               },
                               icon: const Icon(
                                 Icons.arrow_back,

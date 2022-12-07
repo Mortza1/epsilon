@@ -558,7 +558,7 @@ class Contact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Uri url = Uri.parse('https://www.instagram.com/epsilon.2023/?hl=en');
-    Future<void> launchUrll() async {
+    Future<void> _launchUrll() async {
       if (!await launchUrl(url)) {
         throw 'Could not launch $url';
       }
@@ -681,7 +681,7 @@ class Contact extends StatelessWidget {
                   width: 50,
                   alignment: Alignment.center,
                   child: GestureDetector(
-                      onTap: () => launchUrll,
+                      onTap: _launchUrll,
                       child: Image.asset('assets/instagram.png')),
                 )
               ],
