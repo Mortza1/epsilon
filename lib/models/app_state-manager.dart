@@ -17,7 +17,7 @@ import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 class AppStateManager extends ChangeNotifier {
   // all head delegate credentials
 
-  String _headIns = 'private';
+  String _headIns = 'Private';
 
   String get headIns => _headIns;
 
@@ -74,7 +74,7 @@ class AppStateManager extends ChangeNotifier {
 //***************************************************************************************************************************************
   // all member 2 credentials
 
-  String _mem2Ins = 'private';
+  String _mem2Ins = 'Private';
 
   String get mem2Ins => _mem2Ins;
 
@@ -131,7 +131,7 @@ class AppStateManager extends ChangeNotifier {
 //****************************************************************************************************************************************
   // all member 3 details
 
-  String _mem3Ins = 'private';
+  String _mem3Ins = 'Private';
 
   String get mem3Ins => _mem3Ins;
 
@@ -188,7 +188,7 @@ class AppStateManager extends ChangeNotifier {
 //******************************************************************************************************************************************
   //all member 4 details
 
-  String _mem4Ins = 'private';
+  String _mem4Ins = 'Private';
 
   String get mem4Ins => _mem4Ins;
 
@@ -245,7 +245,7 @@ class AppStateManager extends ChangeNotifier {
 //******************************************************************************************************************************************
   //all member 5 details
 
-  String _mem5Ins = 'private';
+  String _mem5Ins = 'Private';
 
   String get mem5Ins => _mem5Ins;
 
@@ -310,7 +310,7 @@ class AppStateManager extends ChangeNotifier {
 
 //******************************************************************************************************************************************
   //all member 6 details
-  String _mem6Ins = 'private';
+  String _mem6Ins = 'Private';
 
   String get mem6Ins => _mem6Ins;
 
@@ -357,7 +357,7 @@ class AppStateManager extends ChangeNotifier {
 
 //******************************************************************************************************************************************
   //all member 7 details
-  String _mem7Ins = 'private';
+  String _mem7Ins = 'Private';
 
   String get mem7Ins => _mem7Ins;
 
@@ -592,9 +592,83 @@ class AppStateManager extends ChangeNotifier {
     }
   }
 
-  String regisID = "";
+  String regisIDPass = "";
+  String regisIDMod = "";
   String tempPass = "";
   String tempCode = "";
+  String specialHash = "";
+  bool modState = false;
+
+  changeModuleCode(context) async {
+    var response = await http
+        .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
+      "query": "changeModulesCode",
+      "hash": _hash,
+    });
+    //Navigator.of(context, rootNavigator: true).pop('dialog');
+    if (kDebugMode) {
+      print(response.body);
+    }
+    if (response.body == "false") {
+      return Fluttertoast.showToast(
+          msg: "Network problem! Try again.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.deepPurpleAccent,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      regisIDMod = json.decode(response.body);
+    }
+  }
+  changeModuleVerify(context, String code) async {
+    var response = await http
+        .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
+      "query": "verifyCode",
+      "regId": regisIDMod,
+      "code" : code
+    });
+    //Navigator.of(context, rootNavigator: true).pop('dialog');
+    if (kDebugMode) {
+      print(response.body);
+    }
+    if (response.body == "false") {
+      modState = false;
+    } else {
+      specialHash = json.decode(response.body);
+      modState = true;
+    }
+  }
+
+  changeModules(context) async {
+    var response = await http
+        .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
+      "query": "changeModules",
+      "hash": _hash,
+      "hash2" : specialHash,
+      "modules" : json.encode(_stemmodules)
+    });
+    //Navigator.of(context, rootNavigator: true).pop('dialog');
+    if (kDebugMode) {
+      print(response.body);
+    }
+    if (response.body == "false") {
+      return Fluttertoast.showToast(
+          msg: "Incorrect code.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.deepPurpleAccent,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else if(response.body == "true"){
+      specialHash = "";
+      regisIDMod = "";
+      _stemmodules = [];
+      //Navigator.pop(context);
+    }
+  }
 
   forgotPassword(String regId, String email, context) async {
     SimpleFontelicoProgressDialog dialog = SimpleFontelicoProgressDialog(
@@ -607,7 +681,7 @@ class AppStateManager extends ChangeNotifier {
         height: 100,
         width: 200,
         textStyle: const TextStyle(color: Colors.white));
-    regisID = regId;
+    regisIDPass = regId;
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
       "query": "forgotPassword",
@@ -657,7 +731,7 @@ class AppStateManager extends ChangeNotifier {
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
       "query": "verifyCode",
-      "regId": regisID,
+      "regId": regisIDPass,
       "code": code,
     });
     dialog.hide();
@@ -700,7 +774,7 @@ class AppStateManager extends ChangeNotifier {
     var response = await http
         .post(Uri.parse("https://www.epsilon.net.pk/query.php"), body: {
       "query": "changePassword",
-      "regId": regisID,
+      "regId": regisIDPass,
       "hash": tempCode,
       "newPass": pass
     });

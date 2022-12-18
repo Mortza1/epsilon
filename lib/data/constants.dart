@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 List modules = [
   "Autocode",
   "Euclid's Elements",
@@ -50,3 +52,5 @@ List modDetails = [
   "Carson's Conundrum is Epsilon's Biology module, being centered around the phenomenon of life; playing around with DNA and coming up with diagnosis from symptoms are just some of the things you will have to do in this module. This module tests participants' scientific knowledge, analytical and practical skills, and creativity. Participants are expected to have a thorough understanding of biology and chemistry; they must also know how to implement this knowledge practically.",
   "Psychosphere is the psychology module of Epsilon. From the behavioural model to the multiple theories of the psychodynamic model, participants will be assessed based on the material they know of the world of psychology. Deducing issues in a study, creating one of your own, this module will break the barriers and cause the participants to use their cognitive skills to the limit!"
 ];
+
+const Color primary = Color(0xff361553);

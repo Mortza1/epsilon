@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
 import '../models/app_state-manager.dart';
 import '../screens/registerPageUpdate.dart';
 
@@ -46,7 +45,7 @@ class _Delegate2State extends State<Delegate2> {
     phoneController.dispose();
     super.dispose();
   }
-  String _groupValue = "private";
+  String _groupValue = "Private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -202,7 +201,7 @@ class _Delegate3State extends State<Delegate3> {
     phoneController.dispose();
     super.dispose();
   }
-  String _groupValue = "private";
+  String _groupValue = "Private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -356,7 +355,7 @@ class _Delegate4State extends State<Delegate4> {
     phoneController.dispose();
     super.dispose();
   }
-  String _groupValue = "private";
+  String _groupValue = "Private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -510,7 +509,7 @@ class _Delegate5State extends State<Delegate5> {
     phoneController.dispose();
     super.dispose();
   }
-  String _groupValue = "private";
+  String _groupValue = "Private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -667,7 +666,7 @@ class _Delegate6State extends State<Delegate6> {
     phoneController.dispose();
     super.dispose();
   }
-  String _groupValue = "private";
+  String _groupValue = "Private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -824,7 +823,7 @@ class _Delegate7State extends State<Delegate7> {
     phoneController.dispose();
     super.dispose();
   }
-  String _groupValue = "private";
+  String _groupValue = "Private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);

@@ -515,7 +515,7 @@ class _HeadDelegateState extends State<HeadDelegate> {
     phoneController.dispose();
     super.dispose();
   }
-  String _groupValue = "private";
+  String _groupValue = "Private";
   @override
   Widget build(BuildContext context) {
     final AppStateManager myProvider = Provider.of<AppStateManager>(context);
@@ -1022,7 +1022,7 @@ class _InstituteBoxState extends State<InstituteBox> {
                           child: Column(
                             children: [
                               Radio(
-                                value: "private",
+                                value: "Private",
                                 groupValue: widget.groupValue,
                                 onChanged: widget.onChange,
                                 activeColor: const Color(0xff361553),
