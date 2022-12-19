@@ -31,7 +31,7 @@ class Herocard extends StatelessWidget {
                     child: Container(
                       height: 300,
                       decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage(images[num]), fit: BoxFit.cover),
+                        image: DecorationImage(image: AssetImage(imagesHero[num]), fit: BoxFit.cover),
                         borderRadius: const BorderRadius.all(Radius.circular(30))
                       ),
                       width: MediaQuery.of(context).size.width,

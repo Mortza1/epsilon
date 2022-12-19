@@ -635,9 +635,11 @@ class AppStateManager extends ChangeNotifier {
     }
     if (response.body == "false") {
       modState = false;
+      notifyListeners();
     } else {
       specialHash = json.decode(response.body);
       modState = true;
+      notifyListeners();
     }
   }
 

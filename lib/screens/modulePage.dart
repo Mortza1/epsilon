@@ -5,20 +5,6 @@ import 'package:provider/provider.dart';
 import '../models/app_state-manager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-Map<String, String> imagesData = {
-  "Autocode": 'assets/autocode.jpg',
-  "Euclid's Elements": 'assets/euclids.jpg',
-  "Sceptical Chymist": 'assets/chymist.jpg',
-  "RoboSonic": 'assets/robosonic.jpg',
-  "Voltaic": 'assets/voltaic.jpg',
-  "Escherian Stairwell": 'assets/stairwell.jpg',
-  "Area 51": 'assets/area51bg.jpg',
-  "Cicada 3301": 'assets/cicada.jpg',
-  "Cerebral Labyrinth": 'assets/cerebral.png',
-  "Carson's Conundrum": 'assets/carson.png',
-  "Psychosphere": 'assets/psycho.png'
-};
-
 class ModulesPortal extends StatefulWidget {
   const ModulesPortal({Key? key}) : super(key: key);
 
@@ -330,27 +316,33 @@ class _ModulesPortalState extends State<ModulesPortal> {
                                                                   myProvider.changeModuleVerify(
                                                                       context,
                                                                       code.text);
-                                                                  if (myProvider
-                                                                      .modState) {
-                                                                    myProvider
-                                                                            .modState =
-                                                                        false;
-                                                                    Navigator.pop(
-                                                                        context,
-                                                                        "cancel");
-                                                                    showDialog<
-                                                                        String>(
-                                                                      barrierDismissible:
-                                                                          false,
-                                                                      context:
+                                                                  Future.delayed(
+                                                                      Duration(
+                                                                          milliseconds:
+                                                                              1000),
+                                                                      () {
+                                                                    print(myProvider
+                                                                        .modState);
+                                                                    if (myProvider
+                                                                        .modState) {
+                                                                      myProvider
+                                                                              .modState =
+                                                                          false;
+                                                                      Navigator.pop(
                                                                           context,
-                                                                      builder: (BuildContext
-                                                                              context) =>
-                                                                          AlertDialog(
-                                                                        shape: const RoundedRectangleBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.all(Radius.circular(10))),
-                                                                        /*title: const Center(
+                                                                          "cancel");
+                                                                      showDialog<
+                                                                          String>(
+                                                                        barrierDismissible:
+                                                                            false,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (BuildContext context) =>
+                                                                                AlertDialog(
+                                                                          shape:
+                                                                              const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                          /*title: const Center(
                                                                           child: Text(
                                                                             "Verification code",
                                                                             style: TextStyle(
@@ -361,65 +353,96 @@ class _ModulesPortalState extends State<ModulesPortal> {
                                                                                 FontWeight.bold),
                                                                           ),
                                                                         ),*/
-                                                                        content:
-                                                                            const SingleChildScrollView(
-                                                                          child:
-                                                                              ModuleSelector(),
-                                                                        ),
-                                                                        actions: <
-                                                                            Widget>[
-                                                                          Center(
+                                                                          content:
+                                                                              const SingleChildScrollView(
                                                                             child:
-                                                                                Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: [
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.all(8.0),
-                                                                                  child: MaterialButton(
-                                                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                                                    color: primary,
-                                                                                    onPressed: () {
-                                                                                      Navigator.pop(context, 'Cancel');
-                                                                                      code.text = "";
-                                                                                      myProvider.setstemModules([]);
-                                                                                    },
-                                                                                    child: const Text(
-                                                                                      'Cancel',
-                                                                                      style: TextStyle(color: Colors.white, fontFamily: "Syne", fontSize: 15),
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.all(8.0),
-                                                                                  child: MaterialButton(
-                                                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                                                    color: primary,
-                                                                                    onPressed: () {
-                                                                                      if (myProvider.stemmodules.length > 3 && myProvider.stemmodules.length < 7) {
-                                                                                        myProvider.changeModules(context);
-                                                                                        Navigator.pop(context);
-                                                                                        setState(() {});
-                                                                                      } else {
-                                                                                        Fluttertoast.showToast(msg: "Choose modules between 4 and 6.", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.deepPurpleAccent, textColor: Colors.white, fontSize: 16.0);
-                                                                                      }
-                                                                                    },
-                                                                                    child: const Text(
-                                                                                      'Done',
-                                                                                      style: TextStyle(color: Colors.white, fontFamily: "Syne", fontSize: 15),
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
+                                                                                ModuleSelector(),
                                                                           ),
-                                                                        ],
-                                                                      ),
-                                                                    );
-                                                                  } else{
-                                                                    Fluttertoast.showToast(msg: "Incorrect code.", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.deepPurpleAccent, textColor: Colors.white, fontSize: 16.0);
-                                                                  }
-                                                                } else{
-                                                                  Fluttertoast.showToast(msg: "Check head email for code.", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.deepPurpleAccent, textColor: Colors.white, fontSize: 16.0);
+                                                                          actions: <
+                                                                              Widget>[
+                                                                            Center(
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Padding(
+                                                                                    padding: const EdgeInsets.all(8.0),
+                                                                                    child: MaterialButton(
+                                                                                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                                      color: primary,
+                                                                                      onPressed: () {
+                                                                                        Navigator.pop(context, 'Cancel');
+                                                                                        code.text = "";
+                                                                                        myProvider.setstemModules([]);
+                                                                                      },
+                                                                                      child: const Text(
+                                                                                        'Cancel',
+                                                                                        style: TextStyle(color: Colors.white, fontFamily: "Syne", fontSize: 15),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                  Padding(
+                                                                                    padding: const EdgeInsets.all(8.0),
+                                                                                    child: MaterialButton(
+                                                                                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                                      color: primary,
+                                                                                      onPressed: () {
+                                                                                        if (myProvider.stemmodules.length > 3 && myProvider.stemmodules.length < 7) {
+                                                                                          myProvider.changeModules(context);
+                                                                                          Navigator.pop(context);
+                                                                                          setState(() {});
+                                                                                        } else {
+                                                                                          Fluttertoast.showToast(msg: "Choose modules between 4 and 6.", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.deepPurpleAccent, textColor: Colors.white, fontSize: 16.0);
+                                                                                        }
+                                                                                      },
+                                                                                      child: const Text(
+                                                                                        'Done',
+                                                                                        style: TextStyle(color: Colors.white, fontFamily: "Syne", fontSize: 15),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    } else {
+                                                                      Fluttertoast.showToast(
+                                                                          msg:
+                                                                              "Incorrect code.",
+                                                                          toastLength: Toast
+                                                                              .LENGTH_SHORT,
+                                                                          gravity: ToastGravity
+                                                                              .BOTTOM,
+                                                                          timeInSecForIosWeb:
+                                                                              1,
+                                                                          backgroundColor: Colors
+                                                                              .deepPurpleAccent,
+                                                                          textColor: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              16.0);
+                                                                    }
+                                                                  });
+                                                                } else {
+                                                                  Fluttertoast.showToast(
+                                                                      msg:
+                                                                          "Check head email for code.",
+                                                                      toastLength:
+                                                                          Toast
+                                                                              .LENGTH_SHORT,
+                                                                      gravity: ToastGravity
+                                                                          .BOTTOM,
+                                                                      timeInSecForIosWeb:
+                                                                          1,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .deepPurpleAccent,
+                                                                      textColor:
+                                                                          Colors
+                                                                              .white,
+                                                                      fontSize:
+                                                                          16.0);
                                                                 }
                                                               },
                                                               child: const Text(

@@ -53,4 +53,17 @@ List modDetails = [
   "Psychosphere is the psychology module of Epsilon. From the behavioural model to the multiple theories of the psychodynamic model, participants will be assessed based on the material they know of the world of psychology. Deducing issues in a study, creating one of your own, this module will break the barriers and cause the participants to use their cognitive skills to the limit!"
 ];
 
+Map<String, String> imagesData = {
+  "Autocode": 'assets/autocode.jpg',
+  "Euclid's Elements": 'assets/euclids.jpg',
+  "Sceptical Chymist": 'assets/chymist.jpg',
+  "RoboSonic": 'assets/robosonic.jpg',
+  "Voltaic": 'assets/voltaic.jpg',
+  "Escherian Stairwell": 'assets/stairwell.jpg',
+  "Area 51": 'assets/area51bg.jpg',
+  "Cicada 3301": 'assets/cicada.jpg',
+  "Cerebral Labyrinth": 'assets/cerebral.png',
+  "Carson's Conundrum": 'assets/carson.png',
+  "Psychosphere": 'assets/psycho.png'
+};
 const Color primary = Color(0xff361553);
